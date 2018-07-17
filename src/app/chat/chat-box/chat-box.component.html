@@ -1,87 +1,115 @@
-<div class="container">
-  <div class="row">
+<div class="container" style="padding-top: 10px;">
+  <div class="row" style="height:auto;">
 
-    <div class="displayBlockMobile" style="position:fixed;width:100%;z-index:1;">
+    <!-- Start of Left Part -->
+    <div class="col-md-4 p-0 bg-secondary">
+      <div class="user scroll">
 
-      <div class="col-sm-12 p-0">
-
-        <nav class="navbar navbar-expand-md navbar-fixed navbar-dark bg-dark">
-
-          <a class="navbar-brand text-white">
-            {{userInfo.firstName}} {{userInfo.lastName}}
-            <i class="online" *ngIf="disconnectedSocket == false"></i>
-            <i class="offline" *ngIf="disconnectedSocket == true"></i>
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-
-            <span class="navbar-toggler-icon"></span>
-
-          </button>
-
-          <div class="collapse people-list navbar-collapse" id="navbarSupportedContent">
-
-            <ul class="list">
-              <li class="p-2 typeOfChats">
-                Online Users:
-              </li>
-              <li class="clearfix cursorPointer" [ngClass]="{'activeChat': user.chating == true}" 
-                *ngFor="let user of userList">
-                <div class="userPresence" *ngIf="user.userId != userInfo.userId">
-                  {{user.name}}
-                </div>
-              </li>
-              
-            </ul>
-
+        <!-- User Name -->
+        <nav class="row navbar bg-secondary m-0">
+          <div class="col-md-10 d-flex justify-content-center">
+            <h4 class="p-4">{{userInfo.firstName}} {{userInfo.lastName}}</h4>
           </div>
-
+          <div class="col-md-12">
+            <button class="btn btn-block btn-success">Logout</button>
+          </div>
         </nav>
 
-      </div>
-
-    </div>
-
-    <div class="col-12 displayNoneMobile col-sm-4 col-md-4 people-list p-0" id="people-list">
-
-      <div class="p-3 text-white textCapitalize textCenter">
-        {{userInfo.firstName}} {{userInfo.lastName}}
-        <i class="fa fa-circle online" *ngIf="disconnectedSocket == false"></i>
-        <i class="fa fa-circle offline" *ngIf="disconnectedSocket == true"></i>
-        <br>
-        <br>
-       
-      </div>
-
-      <ul class="list">
-        <li class="p-2 typeOfChats">
-          Online Users:
-        </li>
-        <li class="clearfix cursorPointer" [ngClass]="{'activeChat': user.chating == true}" 
-          *ngFor="let user of userList">
-          <div class="userPresence" *ngIf="user.userId != userInfo.userId">
-
-            <!-- code to display individual users -->
-
-              {{user.name}}
-
-            <!-- code to display individual users -->
+        <!-- Online users names -->
+        <nav class="row m-0 navbar bg-dark sticky-top">
+          <div class="col-12 ">
+            <h6 class="text-white p-2">Online Users:</h6>
           </div>
-        </li>
-   
-      </ul>
+        </nav>
+
+        <!-- Friends -->
+
+        <!-- Friend 1 -->
+        <div class="row m-0 p-2 border border-top-0 border-left-0 border-right-0 border-dark">
+          <div class="col-md-2 p-3 d-flex justify-content-center">
+            <img src="../../../assets/images/user.png" alt="" style="width:40px;height:40px">
+          </div>
+          <div class="col-md-10 p-3">
+            <div class="row">
+              <div class="col-10">
+                <h4>Sid</h4>
+              </div>
+              <div class="col-2">
+                <i class="fa fa-circle" style="font-size:24px;color: #00c8b1"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Friend 2 -->
+        <div class="row p-2 m-0 p-2 border border-top-0 border-left-0 border-right-0 border-dark">
+          <div class="col-md-2 p-3 d-flex justify-content-center">
+            <img src="../../../assets/images/user.png" alt="" style="width:40px;height:40px">
+          </div>
+          <div class="col-md-10 p-3">
+            <div class="row">
+              <div class="col-10">
+                <h4>Rahul</h4>
+              </div>
+              <div class="col-2">
+                <i class="fa fa-circle" style="font-size:24px;color: #00c8b1"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End of Left Part -->
+
+
+    <!-- Start of Right Part -->
+    <div class="col-md-8 p-0">
+      <nav class="row m-0 navbar sticky-top border border-top-0 border-left-0 border-right-0 border-dark" style="background-color: #1ABC9C;">
+        <div class="col-md-11 p-0">
+          <div class="row m-0">
+            <div class="col-md-2 p-2 d-flex justify-content-center">
+              <img src="../../../assets/images/user.png" alt="" style="width:50px;height:50px">
+            </div>
+            <div class="col-md-10 p-3">
+              <h4>Chat with {{receiverName}}</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1 p-3">
+          <i class="fa fa-ellipsis-v" style="font-size:24px"></i>
+        </div>
+      </nav>
+
+
+
+      <!------------------------------------------------------------>
+      <div class="col-md-12" *ngIf="receiverName">
+        <div class="row" style="background-color: slategrey;">
+          <div class="col-md-10">
+            <input name="message-to-send" id="message-to-send" placeholder="Type your message" style="width: 100%;padding: 7px;margin: 5px;">
+          </div>
+          <div class="col-md-2" style="padding:3px;margin-top: 3px;">
+            <button (click)="sendMessage()" class="btn btn-success btn-block">Send</button>
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+
+
+
+
 
 
     </div>
+    <!-- End of Right Part -->
 
-    
 
   </div>
-  <!-- end chat -->
-
 </div>
-<!-- end container -->
-
-
-
