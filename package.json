@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.0.3",
+    "@angular/animations": "^6.0.7",
     "@angular/common": "^6.0.3",
     "@angular/compiler": "^6.0.3",
     "@angular/core": "^6.0.3",
@@ -20,8 +20,17 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
-    "core-js": "^2.5.4",
-    "rxjs": "^6.0.0",
+    "@types/socket.io-client": "^1.4.32",
+    "bootstrap": "^4.0.0",
+    "core-js": "^2.4.1",
+    "jquery": "^3.3.1",
+    "ngx-cookie-service": "^1.0.10",
+    "ngx-toastr": "^8.8.0",
+    "popper.js": "^1.14.3",
+    "rx-observable-update": "^1.0.0",
+    "rxjs": "^6.2.1",
+    "rxjs-compat": "^6.2.1",
+    "socket.io-client": "^2.1.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
