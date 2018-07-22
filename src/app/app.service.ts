@@ -10,6 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,16 +45,14 @@ export class AppService {
     const params = new HttpParams()
       .set('email', data.email)
       .set('password', data.password);
-      console.log(params);
+    console.log(params);
     return this.http.post(`${this.url}/api/v1/users/login`, params);
   } // end of signin function
 
 
   public logout(): Observable<any> {
-
     const params = new HttpParams()
-      .set('authToken', this.cookie.get('authtoken'))
-
+      .set('authToken', this.cookie.get('authtoken'));
     return this.http.post(`${this.url}/api/v1/users/logout`, params);
 
   } // end logout function

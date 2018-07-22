@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
 
   constructor(public appService: AppService, public router: Router, public toastr: ToastrService, public cookie: CookieService) {
     console.log('login component called');
-   }
+  }
 
-ngOnInit() {
+  ngOnInit() {
   }
 
 
@@ -42,20 +42,22 @@ ngOnInit() {
       };
 
       this.appService.signinFunction(data).subscribe((apiResponse) => {
-       if (apiResponse.status === 200) {
+        if (apiResponse.status === 200) {
           console.log(apiResponse);
           this.cookie.set('authtoken', apiResponse.data.authToken);
           this.cookie.set('receiverId', apiResponse.data.userDetails.userId);
           this.cookie.set('receiverName', apiResponse.data.userDetails.firstName + ' ' + apiResponse.data.userDetails.lastName);
           this.appService.setUserInfoInLocalStorage(apiResponse.data.userDetails);
           this.router.navigate(['/chat']);
+          this.toastr.success(apiResponse.message);
+
         } else {
           this.toastr.error(apiResponse.message);
         }
       },
-      (err) => {
-        this.toastr.error('some error occured');
-      });
+        (err) => {
+          this.toastr.error('some error occured');
+        });
 
     }
   }

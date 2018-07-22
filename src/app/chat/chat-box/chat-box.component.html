@@ -1,115 +1,279 @@
-<div class="container" style="padding-top: 10px;">
-  <div class="row" style="height:auto;">
+<!-- <div class="container">
+  <div class="row">
 
-    <!-- Start of Left Part -->
-    <div class="col-md-4 p-0 bg-secondary">
-      <div class="user scroll">
+    <div class="displayBlockMobile" style="position:fixed;width:100%;z-index:1;">
 
-        <!-- User Name -->
-        <nav class="row navbar bg-secondary m-0">
-          <div class="col-md-10 d-flex justify-content-center">
-            <h4 class="p-4">{{userInfo.firstName}} {{userInfo.lastName}}</h4>
+      <div class="col-sm-12 p-0">
+
+        <nav class="navbar navbar-expand-md navbar-fixed navbar-dark bg-dark">
+
+          <a class="navbar-brand text-white">
+            {{userInfo.firstName}} {{userInfo.lastName}}
+            <i class="fa fa-circle online" *ngIf="disconnectedSocket == false"></i>
+            <i class="fa fa-circle offline" *ngIf="disconnectedSocket == true"></i>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+
+            <span class="navbar-toggler-icon"></span>
+
+          </button>
+
+          <div class="collapse people-list navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="list">
+              <li class="p-2 typeOfChats">
+                Online Users:
+              </li>
+              <li class="clearfix cursorPointer" [ngClass]="{'activeChat': user.chatting == true}" (click)="userSelectedToChat(user.userId, user.name)"
+                *ngFor="let user of userList">
+                <div class="userPresence" *ngIf="user.userId != userInfo.userId">
+                  <user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread"></user-details>
+                </div>
+              </li>
+              
+            </ul>
+
           </div>
-          <div class="col-md-12">
-            <button class="btn btn-block btn-success">Logout</button>
-          </div>
+
         </nav>
-
-        <!-- Online users names -->
-        <nav class="row m-0 navbar bg-dark sticky-top">
-          <div class="col-12 ">
-            <h6 class="text-white p-2">Online Users:</h6>
-          </div>
-        </nav>
-
-        <!-- Friends -->
-
-        <!-- Friend 1 -->
-        <div class="row m-0 p-2 border border-top-0 border-left-0 border-right-0 border-dark">
-          <div class="col-md-2 p-3 d-flex justify-content-center">
-            <img src="../../../assets/images/user.png" alt="" style="width:40px;height:40px">
-          </div>
-          <div class="col-md-10 p-3">
-            <div class="row">
-              <div class="col-10">
-                <h4>Sid</h4>
-              </div>
-              <div class="col-2">
-                <i class="fa fa-circle" style="font-size:24px;color: #00c8b1"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-        <!-- Friend 2 -->
-        <div class="row p-2 m-0 p-2 border border-top-0 border-left-0 border-right-0 border-dark">
-          <div class="col-md-2 p-3 d-flex justify-content-center">
-            <img src="../../../assets/images/user.png" alt="" style="width:40px;height:40px">
-          </div>
-          <div class="col-md-10 p-3">
-            <div class="row">
-              <div class="col-10">
-                <h4>Rahul</h4>
-              </div>
-              <div class="col-2">
-                <i class="fa fa-circle" style="font-size:24px;color: #00c8b1"></i>
-              </div>
-            </div>
-          </div>
-        </div>
 
       </div>
+
     </div>
-    <!-- End of Left Part -->
 
+    <div class="col-12 displayNoneMobile col-sm-4 col-md-4 people-list p-0" id="people-list">
 
-    <!-- Start of Right Part -->
-    <div class="col-md-8 p-0">
-      <nav class="row m-0 navbar sticky-top border border-top-0 border-left-0 border-right-0 border-dark" style="background-color: #1ABC9C;">
-        <div class="col-md-11 p-0">
-          <div class="row m-0">
-            <div class="col-md-2 p-2 d-flex justify-content-center">
-              <img src="../../../assets/images/user.png" alt="" style="width:50px;height:50px">
-            </div>
-            <div class="col-md-10 p-3">
-              <h4>Chat with {{receiverName}}</h4>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-1 p-3">
-          <i class="fa fa-ellipsis-v" style="font-size:24px"></i>
-        </div>
-      </nav>
-
-
-
-      <!------------------------------------------------------------>
-      <div class="col-md-12" *ngIf="receiverName">
-        <div class="row" style="background-color: slategrey;">
-          <div class="col-md-10">
-            <input name="message-to-send" id="message-to-send" placeholder="Type your message" style="width: 100%;padding: 7px;margin: 5px;">
-          </div>
-          <div class="col-md-2" style="padding:3px;margin-top: 3px;">
-            <button (click)="sendMessage()" class="btn btn-success btn-block">Send</button>
-          </div>
-
-
-
-        </div>
+      <div class="p-3 text-white textCapitalize textCenter">
+        {{userInfo.firstName}} {{userInfo.lastName}}
+        <i class="fa fa-circle online" *ngIf="disconnectedSocket == false"></i>
+        <i class="fa fa-circle offline" *ngIf="disconnectedSocket == true"></i>
+        <br>
+        <br>
+        <button (click)="logout()" class="btn btn-info customButton">Logout</button>
       </div>
 
-
-
-
-
-
+      <ul class="list">
+        <li class="p-2 typeOfChats">
+          Online Users:
+        </li>
+        <li class="clearfix cursorPointer" [ngClass]="{'activeChat': user.chatting == true}"
+          *ngFor="let user of userList" (click)="userSelectedToChat(user.userId, user.name)">
+          <div class="userPresence" *ngIf="user.userId != userInfo.userId"  >
+            <user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread"></user-details>
+          </div>
+        </li>
+       
+      </ul>
 
 
     </div>
-    <!-- End of Right Part -->
 
+    <div class="col-12 col-sm-8 col-md-8 chat">
+      <div class="chat-header clearfix mobileMenu" *ngIf="receiverName">
+        <first-char [userName]="receiverName" [userBg]="'blue'" [userColor]="'white'"></first-char>
+
+        <div class="chat-about">
+          <div class="chat-with">Chat with {{receiverName}}</div>
+        </div>
+      </div>
+      
+      <div #scrollMe [scrollTop]="(scrollToChatTop)?0:scrollMe.scrollHeight" class="chat-history" *ngIf="receiverName">
+
+        <ul>
+          <li class="textCenter" *ngIf="receiverName">
+
+            <span  class="cursorPointer" (click)="loadEarlierPageOfChat()">Load Previous Chat</span>
+
+            <br>
+
+            <span *ngIf="loadingPreviousChat == true">Loading...</span>
+
+          </li>
+          <li class="clearfix" *ngFor="let message of messageList">
+            <div class="message-data" [ngClass]="{'align-right': message.senderId == userInfo.userId}">
+              <span class="message-data-time">{{message?.createdOn | date: 'medium' }}</span> &nbsp; &nbsp;
+              <span class="message-data-name floatLeft" *ngIf="message.senderId != userInfo.userId">
+                <i class="fa fa-circle online"></i> {{ message?.senderName }}</span>
+              <span class="message-data-name" *ngIf="message.senderId == userInfo.userId">{{ message?.senderName }}</span>
+              <i class="fa fa-circle me" *ngIf="message.senderId == userInfo.userId"></i>
+
+            </div>
+            <div class="message" [ngClass]="{'float-right other-message': message.senderId == userInfo.userId, 'my-message': message.senderId != userInfo.userId}">
+              {{message?.message | removeSpecialCharPipe: '#' | removeSpecialCharPipe: '$'}}
+            </div>
+          </li>
+
+        </ul>
+
+      </div>
+      <div *ngIf="!receiverName" class="col-sm blankContent">
+        Click on user for start a chat!!!
+      </div>
+     
+
+      <div class="chat-message clearfix p-2" *ngIf="receiverName">
+        <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText"
+          placeholder="Type your message" rows="3"></textarea>
+
+        <button (click)="sendMessage()">Send</button>
+
+      </div>
+    
+
+    </div>
 
   </div>
+ 
+
+</div>
+ -->
+
+
+
+
+
+
+
+<div class="container rounded">
+
+  <div class="row">
+    <div class="col-md-4 col-sm-12 offset-md-1 offset-sm-1 bg-secondary rounded-left" style="height: auto;">
+      <div class="container-full rounded-left" style="margin-left: -15px;margin-right: -15px;">
+        <div class="row">
+
+          <!--------------------------------------left side area -------------------------------------------------->
+          <div class="col-md-12 col-sm-12" *ngIf="userInfo">
+
+            <h4 style="color: white;text-align: center;color: paleturquoise;overflow: hidden;margin-top: 15px;text-transform: capitalize;">
+              <span>
+                <i style="font-size: 15px;background-color: #24F903;margin-top: 0px" class="rounded-circle">o</i>
+              </span> {{userInfo.firstName}} {{userInfo.lastName}}</h4>
+            <hr style="background-color: white;">
+          </div>
+          <div class="col-md-10 col-sm-10 offset-md-1 offset-sm-1">
+            <button class="btn btn-block btn-info" (click)="logout()" style="overflow: hidden;">Logout</button>
+          </div>
+        </div>
+
+        <br>
+        <div></div>
+        <div class="col-md-12 col-sm-12 bg-dark">
+
+          <h6 class="text-white" style="text-align: left;margin-top: 5px;padding:15px;overflow: hidden;margin-left: -20px;">Online Users :</h6>
+        </div>
+
+
+        <div class="col-md-12 col-sm-12 m-0 p-2">
+
+          <div class="col-md-10 p-3">
+            <div class="row">
+              <div class="col-md-12 col-sm-12" style="color: white;">
+                <ul class="online-user" [ngClass]="{'activeChat': user.chatting == true}" (click)="userSelectedToChat(user.userId, user.name)"
+                  *ngFor="let user of userList" style="margin-left: -25px;margin-right: -4%;">
+                  <li *ngIf="user.userId !== userInfo.userId" class="userPresence" style="overflow: hidden;margin-left: -30px;font-size: 20px;font-variant: small-caps;border-bottom: 1px solid white;padding-bottom: 5px" >
+
+                    {{user.name}}
+                  </li>
+                </ul>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+    <!-----------------------------------------right side area to send message-------------------------------------------------------------->
+
+
+    <div class="col-md-6 col-sm-12 bg-secondary rounded-right border-info border-left" >
+      <div class="container-full rounded-right">
+        <div class="row border-bottom border-light">
+          <div class="col-md-1 col-sm-1 text-justify text-center text-monospace" style="margin-top: 15px;">
+            <h1 class="badge" style="color: white;background-color:#1B2A22;font-size: 20px;">P</h1>
+          </div>
+          <div class="col-md-11 col-sm-11">
+            <h5 style="color:white;line-height: 59px;margin-bottom: 0px;text-transform: capitalize;">{{receiverName}}</h5>
+          </div>
+
+        </div>
+        <div class="row">
+          <div *ngIf="!receiverName">
+            Click on user for start a chat!!!
+          </div>
+        </div>
+        <div class="row" *ngIf="receiverName">
+          <div class="col-md-12 col-sm-12">
+            <div #scrollMe [scrollTop]="(scrollToChatTop)?0:scrollMe.scrollHeight" class="chat-history col-md-12" style="height: 350px;">
+
+              <ul style="list-style-type: none;">
+                <li class="textCenter" *ngIf="receiverName">
+
+                  <span class="cursorPointer" (click)="loadEarlierPageOfChat()" style="color: white;text-align: center">Load Previous Chat</span>
+
+                  <br>
+
+                  <span *ngIf="loadingPreviousChat == true" style="color: white;text-align: center">Loading...</span>
+
+                </li>
+                <li class="clearfix" *ngFor="let message of messageList">
+                  <div class="message-data" [ngClass]="{'align-right': message.senderId == userInfo.userId}">
+                    <span class="message-data-time">{{message?.createdOn | date: 'medium' }}</span> &nbsp; &nbsp;
+                    <span class="message-data-name floatLeft" *ngIf="message.senderId != userInfo.userId">
+                      <i class="fa fa-circle online"></i> {{ message?.senderName }}</span>
+                    <span class="message-data-name" *ngIf="message.senderId == userInfo.userId">{{ message?.senderName }}</span>
+                    <i class="fa fa-circle me" *ngIf="message.senderId == userInfo.userId"></i>
+
+                  </div>
+                  <!--  <div class="message" [ngClass]="{'float-right other-message': message.senderId == userInfo.userId, 'my-message': message.senderId != userInfo.userId}">
+                          {{message?.message | removeSpecialCharPipe: '#' | removeSpecialCharPipe: '$'}}
+                        </div> -->
+                </li>
+
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- end chat-history -->
+
+
+
+
+
+
+
+
+
+
+        <div class="row" style="margin-top: -25px;overflow: hidden;">
+          <div class="col-md-12 col-sm-12">
+            <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText"
+              placeholder="Type message..." style="border: 1px solid #1ABC9C;border-radius: 4px;width: 100%;"></textarea>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3" style="padding:3px;margin-top: 3px;">
+            <button (click)="sendMessage()" class="btn btn-success btn-block">Send</button>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </div>
+
 </div>
