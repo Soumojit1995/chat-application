@@ -16,9 +16,6 @@ import { HttpErrorResponse, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class SocketService {
-  [x: string]: any;
-
-
   private url = 'https://chatapi.edwisor.com';
 
   private socket;

@@ -46,7 +46,7 @@ export class ChatBoxComponent implements OnInit {
 
     this.authToken = this.Cookie.get('authtoken');
     this.userInfo = this.appService.getUserInfoFromLocalStorage();
-    this.receiverId = this.Cookie.get('receiverId');
+    // this.receiverId = this.Cookie.get('receiverId');
     this.receiverName = this.Cookie.get('receiverName');
     console.log(this.receiverId, this.receiverName);
 
@@ -122,7 +122,7 @@ export class ChatBoxComponent implements OnInit {
       } else {
 
         this.messageList = previousData;
-        this.toastr.warning('No Messages available');
+        this.toastr.warning(apiResponse.message);
       }
 
       this.loadingPreviousChat = false;
@@ -217,7 +217,6 @@ export class ChatBoxComponent implements OnInit {
       this.socketService.SendChatMessage(chatMsgObject);
       this.pushToChatWindow(chatMsgObject);
 
-
     } else {
       this.toastr.warning('text message can not be empty');
 
@@ -230,7 +229,7 @@ export class ChatBoxComponent implements OnInit {
     this.messageText = '';
     this.messageList.push(data);
     this.scrollToChatTop = false;
-
+    console.log(this.messageText.length);
 
   }// end push to chat window
 
@@ -255,28 +254,30 @@ export class ChatBoxComponent implements OnInit {
 
     this.appService.logout().subscribe((apiResponse) => {
 
-        if (apiResponse.status === 200) {
-          console.log('logout called');
-          this.Cookie.delete('authtoken');
+      if (apiResponse.status === 200) {
+        console.log('logout called');
+        this.Cookie.delete('authtoken');
 
-          this.Cookie.delete('receiverId');
+        this.Cookie.delete('receiverId');
 
-          this.Cookie.delete('receiverName');
+        this.Cookie.delete('receiverName');
 
-          this.socketService.exitSocket();
+        this.socketService.exitSocket();
 
-          this.router.navigate(['/']);
+        this.toastr.success(apiResponse.message);
 
-        } else {
-          this.toastr.error(apiResponse.message);
+        this.router.navigate(['/']);
 
-        } // end condition
+      } else {
+        this.toastr.error(apiResponse.message);
 
-      }, (err) => {
-        this.toastr.error('some error occured');
+      } // end condition
+
+    }, (err) => {
+      this.toastr.error('some error occured');
 
 
-      });
+    });
 
   } // end logout
 

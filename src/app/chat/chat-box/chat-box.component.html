@@ -172,7 +172,7 @@
               <div class="col-md-12 col-sm-12" style="color: white;">
                 <ul class="online-user" [ngClass]="{'activeChat': user.chatting == true}" (click)="userSelectedToChat(user.userId, user.name)"
                   *ngFor="let user of userList" style="margin-left: -25px;margin-right: -4%;">
-                  <li *ngIf="user.userId !== userInfo.userId" class="userPresence" style="overflow: hidden;margin-left: -30px;font-size: 20px;font-variant: small-caps;border-bottom: 1px solid white;padding-bottom: 5px" >
+                  <li *ngIf="user.userId !== userInfo.userId" class="userPresence" style="overflow: hidden;margin-left: -30px;font-size: 20px;font-variant: small-caps;border-bottom: 1px solid white;padding-bottom: 5px">
 
                     {{user.name}}
                   </li>
@@ -193,7 +193,7 @@
     <!-----------------------------------------right side area to send message-------------------------------------------------------------->
 
 
-    <div class="col-md-6 col-sm-12 bg-secondary rounded-right border-info border-left" >
+    <div class="col-md-6 col-sm-12 bg-secondary rounded-right border-info border-left">
       <div class="container-full rounded-right">
         <div class="row border-bottom border-light">
           <div class="col-md-1 col-sm-1 text-justify text-center text-monospace" style="margin-top: 15px;">
@@ -211,7 +211,7 @@
         </div>
         <div class="row" *ngIf="receiverName">
           <div class="col-md-12 col-sm-12">
-            <div #scrollMe [scrollTop]="(scrollToChatTop)?0:scrollMe.scrollHeight" class="chat-history col-md-12" style="height: 350px;">
+            <div #scrollMe [scrollTop]="(scrollToChatTop)?0:scrollMe.scrollHeight" class="chat-history col-md-12" style="height:75vh;">
 
               <ul style="list-style-type: none;">
                 <li class="textCenter" *ngIf="receiverName">
@@ -225,16 +225,21 @@
                 </li>
                 <li class="clearfix" *ngFor="let message of messageList">
                   <div class="message-data" [ngClass]="{'align-right': message.senderId == userInfo.userId}">
+
                     <span class="message-data-time">{{message?.createdOn | date: 'medium' }}</span> &nbsp; &nbsp;
-                    <span class="message-data-name floatLeft" *ngIf="message.senderId != userInfo.userId">
+
+                    <span class="message-data-name floatLeft" id="left-data" *ngIf="message.senderId != userInfo.userId">
+
                       <i class="fa fa-circle online"></i> {{ message?.senderName }}</span>
+
                     <span class="message-data-name" *ngIf="message.senderId == userInfo.userId">{{ message?.senderName }}</span>
+
                     <i class="fa fa-circle me" *ngIf="message.senderId == userInfo.userId"></i>
 
                   </div>
-                  <!--  <div class="message" [ngClass]="{'float-right other-message': message.senderId == userInfo.userId, 'my-message': message.senderId != userInfo.userId}">
-                          {{message?.message | removeSpecialCharPipe: '#' | removeSpecialCharPipe: '$'}}
-                        </div> -->
+                  <div class="message" [ngClass]="{'float-right other-message': message.senderId == userInfo.userId, 'my-message': message.senderId != userInfo.userId}">
+                    {{message?.message }}
+                  </div>
                 </li>
 
               </ul>
@@ -242,32 +247,22 @@
             </div>
           </div>
         </div>
-
+<br>
         <!-- end chat-history -->
-
-
-
-
-
-
-
-
-
 
         <div class="row" style="margin-top: -25px;overflow: hidden;">
           <div class="col-md-12 col-sm-12">
-            <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText"
-              placeholder="Type message..." style="border: 1px solid #1ABC9C;border-radius: 4px;width: 100%;"></textarea>
+            <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText" placeholder="Type message..." style="border: 1px solid #1ABC9C;border-radius: 4px;width: 100%;"></textarea>
           </div>
 
         </div>
 
 
-        <div class="row">
+       <!--  <div class="row">
           <div class="col-md-6 col-sm-6 offset-md-3 offset-sm-3" style="padding:3px;margin-top: 3px;">
             <button (click)="sendMessage()" class="btn btn-success btn-block">Send</button>
           </div>
-        </div>
+        </div> -->
 
 
 
