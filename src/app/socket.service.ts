@@ -26,21 +26,21 @@ export class SocketService {
 
   public verifyUser = () => {
     return Observable.create((observer) => {
-      this.socket.on('verifyUser', data => {
+      this.socket.on('verifyUser', (data) => {
         observer.next(data);
       }); // end of socket
     }); // end of observable
   } // end of verify verifyUser
 
 
-  public setUser = authToken => {
+  public setUser = (authToken) => {
     this.socket.emit('set-user', authToken);
   } // end setUser
 
 
   public onlineUserList = () => {
     return Observable.create((observer) => {
-      this.socket.on('online-user-list', userList => {
+      this.socket.on('online-user-list', (userList) => {
         observer.next(userList);
       }); // end of socket
     }); // end of Observable

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import {RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { ChatModule } from './chat/chat.module';
 import { UserModule } from './user/user.module';
@@ -12,9 +12,11 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { ToastrModule } from 'ngx-toastr';
 
+
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -23,14 +25,14 @@ import { ToastrModule } from 'ngx-toastr';
     ChatModule,
     UserModule,
     RouterModule.forRoot([
-      {path: 'login', component: LoginComponent, pathMatch: 'full'},
-      {path: '', redirectTo: 'login', pathMatch: 'full' },
-      {path: '*', component: LoginComponent },
-      {path: '**',  component: LoginComponent }
+      { path: 'login', component: LoginComponent, pathMatch: 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: '*', component: LoginComponent },
+      { path: '**', component: LoginComponent }
     ])
   ],
   providers: [CookieService,
-              HttpClientModule],
+    HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

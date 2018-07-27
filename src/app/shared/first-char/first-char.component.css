@@ -1,0 +1,8 @@
+.crop {
+    border-radius: 5px;
+    background-color: #2C3E50 !important;
+    padding-top: 10px;;
+    padding-left: 10px;
+    text-transform: capitalize;
+    font-size: 20px;
+  }

@@ -1,11 +1,4 @@
-.online{
 
-    height: 10px;
-    width: 10px;
-    background-color:green;
-    /* border-radius: 50%; */
-    display: inline-block;
-  }
   
   .offline{
   
@@ -93,12 +86,28 @@
       padding: 0;
     }
     
-    .people-list ul li .userPresence {
+   .userPresence {
       float: left;
-      padding: 0.7em 0.2em;
+     
       color: white;
-      text-transform: capitalize;
+     
+      background-color:#2C3E50;
+      
+      font-size: 20px;
+      margin-left: -5%;
+      margin-right: -20% !important;
+      margin-bottom: 5px;
+      box-shadow: 2px 2px 0px 1px silver;
+   
+      border-radius: 5px;     
+     
     }
+    
+
+
+.userPresence:hover{
+  cursor: pointer;
+}
     
     .textCapitalize {
       text-transform: capitalize;
@@ -299,6 +308,8 @@
       background:#658C85;
       border-radius: 4px;
       
+      box-shadow: -20px 10px 5px -15px  #2C381F inset; 
+      
     }
     
     .typeOfChats {
@@ -458,15 +469,6 @@ div.scroll {
 
  
 
-.online-user:first-child{
-  margin-top: -25px;
-}
-.userPresence {
-  text-transform: capitalize;
-}
-.userPresence:hover{
-  cursor: pointer;
-}
 
 
 

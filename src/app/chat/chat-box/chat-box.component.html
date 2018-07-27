@@ -32,7 +32,7 @@
                   <user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread"></user-details>
                 </div>
               </li>
-              
+
             </ul>
 
           </div>
@@ -64,7 +64,7 @@
             <user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread"></user-details>
           </div>
         </li>
-       
+
       </ul>
 
 
@@ -78,7 +78,7 @@
           <div class="chat-with">Chat with {{receiverName}}</div>
         </div>
       </div>
-      
+
       <div #scrollMe [scrollTop]="(scrollToChatTop)?0:scrollMe.scrollHeight" class="chat-history" *ngIf="receiverName">
 
         <ul>
@@ -111,7 +111,7 @@
       <div *ngIf="!receiverName" class="col-sm blankContent">
         Click on user for start a chat!!!
       </div>
-     
+
 
       <div class="chat-message clearfix p-2" *ngIf="receiverName">
         <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText"
@@ -120,12 +120,12 @@
         <button (click)="sendMessage()">Send</button>
 
       </div>
-    
+
 
     </div>
 
   </div>
- 
+
 
 </div>
  -->
@@ -139,11 +139,11 @@
 <div class="container rounded">
 
   <div class="row">
-    <div class="col-md-4 col-sm-12 offset-md-1 offset-sm-1 bg-secondary rounded-left" style="height: auto;">
+     <!--------------------------------------left side area -------------------------------------------------->
+    <div class="col-md-3 col-sm-12 offset-md-1 offset-sm-1  rounded-left" style="height: auto;background-color:#BCC2AF">
       <div class="container-full rounded-left" style="margin-left: -15px;margin-right: -15px;">
         <div class="row">
 
-          <!--------------------------------------left side area -------------------------------------------------->
           <div class="col-md-12 col-sm-12" *ngIf="userInfo">
 
             <h4 style="color: white;text-align: center;color: paleturquoise;overflow: hidden;margin-top: 15px;text-transform: capitalize;">
@@ -168,15 +168,17 @@
         <div class="col-md-12 col-sm-12 m-0 p-2">
 
           <div class="col-md-10 p-3">
-            <div class="row">
+            <div class="row" style="margin-top: -10%;margin-left: -15%;margin-right: -35%;overflow: hidden;">
               <div class="col-md-12 col-sm-12" style="color: white;">
-                <ul class="online-user" [ngClass]="{'activeChat': user.chatting == true}" (click)="userSelectedToChat(user.userId, user.name)"
-                  *ngFor="let user of userList" style="margin-left: -25px;margin-right: -4%;">
-                  <li *ngIf="user.userId !== userInfo.userId" class="userPresence" style="overflow: hidden;margin-left: -30px;font-size: 20px;font-variant: small-caps;border-bottom: 1px solid white;padding-bottom: 5px">
 
-                    {{user.name}}
-                  </li>
-                </ul>
+
+                  <div *ngFor="let user of userList" >
+                      <div class="userPresence col-md-12"  *ngIf="user.userId != userInfo.userId" [ngClass]="{'activeChat': user.chatting == true}" (click)="userSelectedToChat(user.userId, user.name)">
+                        <app-user-details [userFirstName]="user.name" [userLastName]="''" [userStatus]="'online'" [messageRead]="user.unread" ></app-user-details>
+                      </div>
+                    </div>
+
+
 
               </div>
 
@@ -195,19 +197,25 @@
 
     <div class="col-md-6 col-sm-12 bg-secondary rounded-right border-info border-left">
       <div class="container-full rounded-right">
-        <div class="row border-bottom border-light">
-          <div class="col-md-1 col-sm-1 text-justify text-center text-monospace" style="margin-top: 15px;">
-            <h1 class="badge" style="color: white;background-color:#1B2A22;font-size: 20px;">P</h1>
+        <div class="row border-bottom border-light" *ngIf="receiverName">
+          <div class="col-md-1 col-sm-1 text-justify text-center text-monospace" style="margin-top: 15px;" >
+            <app-first-char [name]="receiverName" [userBg]="'blue'" [userColor]="'white'" (notify)="showUserName($event)"></app-first-char>
           </div>
           <div class="col-md-11 col-sm-11">
             <h5 style="color:white;line-height: 59px;margin-bottom: 0px;text-transform: capitalize;">{{receiverName}}</h5>
           </div>
-
         </div>
-        <div class="row">
-          <div *ngIf="!receiverName">
-            Click on user for start a chat!!!
-          </div>
+
+        <div class="row border-bottom border-light" *ngIf="!receiverName">
+            <div class="col-md-1 col-sm-1 text-justify text-center text-monospace" style="margin-top: 15px;" >
+              <h1 class="badge" style="color: white;background-color:#1B2A22;font-size: 20px;"></h1>
+            </div>
+            <div class="col-md-11 col-sm-11">
+              <h5 style="color:white;line-height: 59px;margin-bottom: 0px;text-transform: capitalize;">Select user to chat</h5>
+            </div>
+
+
+
         </div>
         <div class="row" *ngIf="receiverName">
           <div class="col-md-12 col-sm-12">
@@ -250,7 +258,7 @@
 <br>
         <!-- end chat-history -->
 
-        <div class="row" style="margin-top: -25px;overflow: hidden;">
+        <div class="row" style="margin-top: -25px;overflow: hidden;" *ngIf="receiverName">
           <div class="col-md-12 col-sm-12">
             <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText" placeholder="Type message..." style="border: 1px solid #1ABC9C;border-radius: 4px;width: 100%;"></textarea>
           </div>

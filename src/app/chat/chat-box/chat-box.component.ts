@@ -47,7 +47,7 @@ export class ChatBoxComponent implements OnInit {
     this.authToken = this.Cookie.get('authtoken');
     this.userInfo = this.appService.getUserInfoFromLocalStorage();
     // this.receiverId = this.Cookie.get('receiverId');
-    this.receiverName = this.Cookie.get('receiverName');
+    // this.receiverName = this.Cookie.get('receiverName');
     console.log(this.receiverId, this.receiverName);
 
     if (this.receiverId !== null && this.receiverId !== undefined && this.receiverId !== '') {
@@ -229,7 +229,7 @@ export class ChatBoxComponent implements OnInit {
     this.messageText = '';
     this.messageList.push(data);
     this.scrollToChatTop = false;
-    console.log(this.messageText.length);
+    // console.log(this.messageText.length);
 
   }// end push to chat window
 

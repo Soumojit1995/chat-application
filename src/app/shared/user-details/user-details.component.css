@@ -1,0 +1,53 @@
+.crop {
+   
+   
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    float: left;
+    text-transform: uppercase;
+    background-color: blue;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-left: -5%;
+    margin-top: 1.5%;
+  }
+  
+  .about {
+    float: left;
+    padding-left: 0.4em;
+  }
+  
+  .online,
+  .offline,
+  .me,
+  .warning {
+    margin-right: 3px;
+    font-size: 0.8em;
+  }
+  
+  .online {
+    color: #86BB71;
+  }
+  
+  .offline {
+    color: #E38968;
+  }
+  
+  .me {
+    color: #94C2ED;
+  }
+  
+  .warning {
+    color: #00c8e7;
+  }
+  
+  .status {
+    color: #92959E;
+    font-size: 16px;
+  }
+  
+  .name {
+    float: left;
+    text-transform: capitalize;
+  }
