@@ -6,3 +6,6 @@
     text-transform: capitalize;
     font-size: 20px;
   }
+  .crop:hover{
+    cursor: pointer;
+  }

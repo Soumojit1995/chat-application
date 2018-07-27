@@ -199,7 +199,7 @@
       <div class="container-full rounded-right">
         <div class="row border-bottom border-light" *ngIf="receiverName">
           <div class="col-md-1 col-sm-1 text-justify text-center text-monospace" style="margin-top: 15px;" >
-            <app-first-char [name]="receiverName" [userBg]="'blue'" [userColor]="'white'" (notify)="showUserName($event)"></app-first-char>
+            <app-first-char [name]="receiverName" [userBg]="''" [userColor]="'white'" (notify)="showUserName($event)"></app-first-char>
           </div>
           <div class="col-md-11 col-sm-11">
             <h5 style="color:white;line-height: 59px;margin-bottom: 0px;text-transform: capitalize;">{{receiverName}}</h5>

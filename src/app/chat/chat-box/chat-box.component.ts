@@ -281,5 +281,7 @@ export class ChatBoxComponent implements OnInit {
 
   } // end logout
 
-
+public showUserName = (name: string) => {
+  this.toastr.success('You Are chatting with ' + name);
+}
 }
