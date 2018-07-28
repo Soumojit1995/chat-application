@@ -213,10 +213,8 @@
             <div class="col-md-11 col-sm-11">
               <h5 style="color:white;line-height: 59px;margin-bottom: 0px;text-transform: capitalize;">Select user to chat</h5>
             </div>
-
-
-
         </div>
+
         <div class="row" *ngIf="receiverName">
           <div class="col-md-12 col-sm-12">
             <div #scrollMe [scrollTop]="(scrollToChatTop)?0:scrollMe.scrollHeight" class="chat-history col-md-12" style="height:75vh;">
@@ -246,7 +244,7 @@
 
                   </div>
                   <div class="message" [ngClass]="{'float-right other-message': message.senderId == userInfo.userId, 'my-message': message.senderId != userInfo.userId}">
-                    {{message?.message }}
+                    {{message?.message | removeSpecialCharPipe: '#' | removeSpecialCharPipe: '$'}}
                   </div>
                 </li>
 
@@ -255,12 +253,12 @@
             </div>
           </div>
         </div>
-<br>
+
         <!-- end chat-history -->
 
-        <div class="row" style="margin-top: -25px;overflow: hidden;" *ngIf="receiverName">
+        <div class="row" *ngIf="receiverName">
           <div class="col-md-12 col-sm-12">
-            <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText" placeholder="Type message..." style="border: 1px solid #1ABC9C;border-radius: 4px;width: 100%;"></textarea>
+            <textarea name="message-to-send" id="message-to-send" (keydown)="sendMessageUsingKeypress($event)" [(ngModel)]="messageText"></textarea>
           </div>
 
         </div>

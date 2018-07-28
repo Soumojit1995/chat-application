@@ -224,12 +224,12 @@
       left: 90%;
     }
 
-    .chat .chat-message textarea {
+     textarea {
       width: 100%;
       border: none;
       padding: 0.8em 1.42em;
       margin-bottom: 0.8em;
-      border-radius: 5px;
+      border-radius: 4px;
       resize: none;
     }
 
@@ -400,7 +400,7 @@
 
 .chat-history {
     padding: 2em 2em 1.42em;
-    border-bottom: 0.15em solid white;
+    /* border-bottom: 0.15em solid white; */
     overflow-y: scroll;
     height: 80vh;
   }
@@ -425,7 +425,7 @@
   line-height: 1.9em;
   font-size: 1.1em;
   border-radius: 7px;
-  margin-bottom: 2em;
+  /* margin-bottom: 2em; */
   width: 90%;
   position: relative;
 }

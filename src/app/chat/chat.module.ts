@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { RemoveSpecialCharPipe } from '../shared/pipe/remove-special-char.pipe';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
       {path: 'chat', component: ChatBoxComponent }
     ])
   ],
-  declarations: [ChatBoxComponent]
+  declarations: [ChatBoxComponent, RemoveSpecialCharPipe]
 })
 export class ChatModule { }

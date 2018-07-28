@@ -5,6 +5,7 @@ import { AppService } from './../../app.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -281,7 +282,7 @@ export class ChatBoxComponent implements OnInit {
 
   } // end logout
 
-public showUserName = (name: string) => {
-  this.toastr.success('You Are chatting with ' + name);
-}
+  public showUserName = (name: string) => {
+    this.toastr.success('You Are chatting with ' + name);
+  }
 }
