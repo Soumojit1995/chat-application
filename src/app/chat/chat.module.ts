@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { RemoveSpecialCharPipe } from '../shared/pipe/remove-special-char.pipe';
+import { ChatRouteGuardService } from './chat-route-guard.service';
 
 @NgModule({
   imports: [
@@ -19,9 +20,10 @@ import { RemoveSpecialCharPipe } from '../shared/pipe/remove-special-char.pipe';
     AngularFontAwesomeModule,
     SharedModule,
     RouterModule.forChild([
-      {path: 'chat', component: ChatBoxComponent }
+      { path: 'chat', component: ChatBoxComponent, canActivate: [ChatRouteGuardService] }
     ])
   ],
-  declarations: [ChatBoxComponent, RemoveSpecialCharPipe]
+  declarations: [ChatBoxComponent, RemoveSpecialCharPipe],
+  providers: [ChatRouteGuardService]
 })
 export class ChatModule { }

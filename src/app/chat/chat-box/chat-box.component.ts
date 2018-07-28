@@ -5,7 +5,9 @@ import { AppService } from './../../app.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
-import * as $ from 'jquery';
+import { ChatMessage } from './chat';
+// import { CheckUser } from '../../CheckUser';
+
 
 
 @Component({
@@ -49,12 +51,12 @@ export class ChatBoxComponent implements OnInit {
     this.userInfo = this.appService.getUserInfoFromLocalStorage();
     // this.receiverId = this.Cookie.get('receiverId');
     // this.receiverName = this.Cookie.get('receiverName');
-    console.log(this.receiverId, this.receiverName);
+    // console.log(this.receiverId, this.receiverName);
 
     if (this.receiverId !== null && this.receiverId !== undefined && this.receiverId !== '') {
       this.userSelectedToChat(this.receiverId, this.receiverName);
     }
-    this.checkStatus();
+    // this.checkStatus();
     this.verifyUserConfirmation();
     this.getOnlineUserList();
     this.getMessageFromAUser();
@@ -63,7 +65,7 @@ export class ChatBoxComponent implements OnInit {
 
 
 
-  public checkStatus: any = () => {
+/*   public checkStatus: any = () => {
 
     if (this.Cookie.get('authtoken') === undefined || this.Cookie.get('authtoken') === '' || this.Cookie.get('authtoken') === null) {
 
@@ -77,7 +79,7 @@ export class ChatBoxComponent implements OnInit {
 
     }
 
-  } // end checkStatus
+  } // end checkStatus */
 
 
 
@@ -206,7 +208,7 @@ export class ChatBoxComponent implements OnInit {
 
     if (this.messageText) {
 
-      const chatMsgObject = {
+      const chatMsgObject: ChatMessage = {
         senderName: this.userInfo.firstName + ' ' + this.userInfo.lastName,
         senderId: this.userInfo.userId,
         receiverName: this.Cookie.get('receiverName'),
